@@ -1,0 +1,11 @@
+*** installation Conda
+update et upgrade de conda
+création d'un environnement Conda avec flask
+*** installation visual studio code
+*** création d'un répertoire Flask_Blog
+*** création d'un fichier flask_blog.py
+*** test application "hello world"
+-> pour connaître le fichier à lancer
+*** SET FLASK_APP=flaskblog.py
+-> pour passer en mode debug
+*** SET FLASK_DEBUG=1
