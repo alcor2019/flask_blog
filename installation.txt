@@ -9,3 +9,28 @@ création d'un environnement Conda avec flask
 *** SET FLASK_APP=flaskblog.py
 -> pour passer en mode debug
 *** SET FLASK_DEBUG=1
+
+
+
+
+####################### GIT ######################
+
+*** configuration du proxy
+git config --global http.proxy http_proxy=http://CORVISIER-03356:Bu7o3e,=@55.227.148.201:3128
+
+*** Ajout d'un remote repository pour sauvegarde
+git remote add flask_blog https://github.com/alcor2019/flask_blog
+*** Vérification du remote repository
+git remote -v
+*** pushing to the remote repository
+git push flask_blog master
+
+
+*** Suppression du remote repository mal nommé
+git remote remove flask_blog
+*** vérification des informations du remote repository
+git remote show flask_blog
+
+
+
+
