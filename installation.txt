@@ -10,7 +10,11 @@ création d'un environnement Conda avec flask
 -> pour passer en mode debug
 *** SET FLASK_DEBUG=1
 
+*** pour les formulaires
+conda install flask_wtf
 
+*** pour la sécurisation du site
+import secrets
 
 
 ####################### GIT ######################
@@ -31,6 +35,6 @@ git remote remove flask_blog
 *** vérification des informations du remote repository
 git remote show flask_blog
 
-
-
-
+*** configuration user.name et user.email
+git config --global user.name "alcor2019"
+git config --global user.email alain.corvisier@gmail.com
