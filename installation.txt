@@ -38,3 +38,91 @@ git remote show flask_blog
 *** configuration user.name et user.email
 git config --global user.name "alcor2019"
 git config --global user.email alain.corvisier@gmail.com
+
+###################### FLASK_ALCHEMY ####################
+
+>>> from flaskblog import db
+C:\Users\CORVISIER-03356\AppData\Local\Continuum\anaconda3\envs\flask_blog\lib\site-packages\flask_sqlalchemy\__init__.py:835: FSADeprecationWarning: SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and will be disabled by default in the future.  Set it to True or False to suppress this warning.
+  'SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and '
+>>> db.create_all()
+>>> From flaskblog import User, Post
+  File "<stdin>", line 1
+    From flaskblog import User, Post
+                 ^
+SyntaxError: invalid syntax
+>>> from flaskblog import User, Post
+>>> user_1 = User(username='Corey', email='C@demo.com', password='password')
+>>> db.session.add(user_1)
+>>> user_2 = User(username='JohnDoe', email='jd@demo.com', password='password')
+>>> db.session.add(user_2)
+>>> db.session.commit()
+>>> User.query.all()
+[User('Corey', 'C@demo.com', 'default.jpg'), User('JohnDoe', 'jd@demo.com', 'default.jpg')]
+>>> User.query.first()
+User('Corey', 'C@demo.com', 'default.jpg')
+>>> User.query.filter_by(username='Corey')
+<flask_sqlalchemy.BaseQuery object at 0x0388C930>
+>>> User.query.filter_by(username='Corey').all()
+[User('Corey', 'C@demo.com', 'default.jpg')]
+>>> User.query.filter_by(username='Corey').first()
+User('Corey', 'C@demo.com', 'default.jpg')
+>> user = User.query.filter_by(username='Corey').first()
+>>> user
+User('Corey', 'C@demo.com', 'default.jpg')
+>>> user.id
+1
+>>> user = User.query.get(1)
+>>> user
+User('Corey', 'C@demo.com', 'default.jpg')
+>>> user.posts
+[]
+>>> post_1 = Post(title='Blog 1', content='First Post Content', user_id=user.id)
+>>> post_2 = Post(title='Blog 2', content='Second Post Content', user_id=user.id)
+>>> db.session.add(post_1)
+>>> db.session.add(post_2)
+>>> db.session.commit()
+>>> user.posts
+[Post('Blog 1', '2019-09-09 14:41:34.935406'), Post('Blog 2', '2019-09-09 14:41:34.942406')]
+>>> for post in user.posts:
+...     print(post.title)
+...
+Blog 1
+Blog 2
+>>> post = Post.query.first()
+>>> post
+Post('Blog 1', '2019-09-09 14:41:34.935406')
+>>> post.user_id
+1
+>>> post.author
+User('Corey', 'C@demo.com', 'default.jpg')
+>>> db.drop_all()
+>>> db.create_all()
+>>> User.query.all()
+[]
+>>> Post.query.all()
+[]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
