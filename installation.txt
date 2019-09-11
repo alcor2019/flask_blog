@@ -102,12 +102,13 @@ User('Corey', 'C@demo.com', 'default.jpg')
 >>> Post.query.all()
 []
 
+############### Après la structuration du projet sous forme de paquet
 
-
-
-
-
-
+>>>from forms import RegistrationForm, LoginForm
+>>>from flaskblog.models import User, Post
+>>>db.create_all()
+>>>User.query.all()
+[]
 
 
 
