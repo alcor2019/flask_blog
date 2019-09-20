@@ -111,9 +111,64 @@ User('Corey', 'C@demo.com', 'default.jpg')
 []
 
 
+####### 6 - Python Flask Tutorial: Full-Featured Web App Part 6 - User Authentication
+> Installation du paquet flask-bcrypt
+conda install -c conda-forge flask-bcrypt
+
+>>> from flask_bcrypt import Bcrypt
+>>> bcrypt = Bcrypt()
+>>> bcrypt.generate_password_hash('testing')
+b'$2b$12$KjwM.63zaxSOSdOajla/3uqsTWei7f/26BS5XauU23dr/tb14wXZK'
+>>> bcrypt.generate_password_hash('testing').decode('utf-8')
+'$2b$12$Fr2PruXkDmwgIX3ON1IaQeLMVrPFgOtcqntELLqJl7B5SNIPsZ1pO'
+>>> bcrypt.generate_password_hash('testing').decode('utf-8')
+'$2b$12$08moaXWnCkq1tAJSXwjCNO79GESVm89NVaHNt1TNGJYclt5PedzMC'
+>>> hashed_pw = bcrypt.generate_password_hash('testing').decode('utf-8')
+>>> bcrypt.check_password_hash(hashed_pw, 'password')
+False
+>>> bcrypt.check_password_hash(hashed_pw, 'testing')
+True
+
+> Test création d'un utilisateur via l'interface WEB puis vérification en ligne de commande de la modification de la Base
+>>> from flaskblog import db
+>>> from flaskblog.models import User
+>>> user = User.query.first()
+>>> user
+User('CoreyMS', 'CoreyMSchafer@gmail.com', 'default.jpg')
+>>> user.password
+'$2b$12$E0PsCWQNbrCG7fXXtGO6I.1RWhWehRVOQdvEErl5Xfc43yqIAcNwi'
+
+> Tentative de création d'un second utilisateur avec les mêmes caractéristiques via l'interface WEB -> constraint
+> possibilité d'inspecter les variables avec l'insertion du code PIN indiqué au lancement de l'application
 
 
+sqlalchemy.exc.IntegrityError
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: user.email
+[SQL: INSERT INTO user (username, email, image_file, password) VALUES (?, ?, ?, ?)]
+[parameters: ('CoreyMS', 'CoreyMSchafer@gmail.com', 'default.jpg', '$2b$12$pLVqiR5mkTfV2mh0zyxjOeSC0IpdvuXc1gcmpELyE0gQ7TERUU1H.')]
+(Background on this error at: http://sqlalche.me/e/gkpj)
+....
+File "S:\PROJETS\Flask_Blog\flaskblog\routes.py", line 37, in register
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+Open an interactive python shell in this frame        ​flash('Your account has been created! You are now able to log in', 'success'
+        return redirect(url_for('login'))
+    return render_template('register.html', title='Register', form=form)
+ 
+@app.route("/login", methods=['GET', 'POST'])
+[console ready]
+>>> user
+User('CoreyMS', 'CoreyMSchafer@gmail.com', 'None')
+>>> user.email
+'CoreyMSchafer@gmail.com'
+>>> 
+....
 
+> Installation du paquet flask-login
 
 
 
