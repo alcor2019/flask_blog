@@ -45,11 +45,6 @@ git config --global user.email alain.corvisier@gmail.com
 C:\Users\CORVISIER-03356\AppData\Local\Continuum\anaconda3\envs\flask_blog\lib\site-packages\flask_sqlalchemy\__init__.py:835: FSADeprecationWarning: SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and will be disabled by default in the future.  Set it to True or False to suppress this warning.
   'SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and '
 >>> db.create_all()
->>> From flaskblog import User, Post
-  File "<stdin>", line 1
-    From flaskblog import User, Post
-                 ^
-SyntaxError: invalid syntax
 >>> from flaskblog import User, Post
 >>> user_1 = User(username='Corey', email='C@demo.com', password='password')
 >>> db.session.add(user_1)
