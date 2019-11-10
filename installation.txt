@@ -195,8 +195,51 @@ https://mdbootstrap.com/docs/jquery/modals/basic/
   </div>
 </div>
 
+Part 10 
 
+>>> from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+>>> s = Serializer('secret', 30)
+>>> token = s.dumps({'user_id': 1}).decode('utf-8')
+>>> token
+'eyJhbGciOiJIUzUxMiIsImlhdCI6MTU3MDc4MTMxMSwiZXhwIjoxNTcwNzgxMzQxfQ.eyJ1c2VyX2lkIjoxfQ.8Vl_5N4e1mX1Kaduuk2AVH32dmk6_xpZFoYmRkya21bKrJRcD3NY2esz0QhcbFadOjz_vHosgE93BBRB4SjHrw'
+>>> s.loads(token)
+{'user_id': 1}
+>>> s.loads(token)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Users\CORVISIER-03356\AppData\Local\Continuum\anaconda3\envs\flask_blog\lib\site-packages\itsdangerous\jws.py", line 205, in loads
+    date_signed=self.get_issue_date(header),
+itsdangerous.exc.SignatureExpired: Signature expired
 
+Installation Pillow du module 7 (PIL)
+conda install Pillow
+Leçon 10 - Email and Password Reset
+
+Installation de flask-mail
+>>conda install -c conda-forge flask-mail
+
+Pour que les lignes de code suivantes fonctionnent dans le fichier __init__.py
+Il faut que je crée les variables EMAIL_USER et EMAIL_PASS correspondantes ou bien que je code ces choses en dur dans l'appli (!!! DANGER !!!)
+app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
+app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
+
+La valeur sender, originellement égale à noreply@demo.com dans la fonction send_reset_email de routes.py a été remplacée par alain.corvisier@gmail.com 
+    msg = Message('Password Reset Request',
+                   sender='alain.corvisier@gmail.com',
+                   recipients=[user.email])
+
+les valeurs suivantes ont été mises à jour
+smtp.gmail.com au lieu de smtp.googlemail.com
+et 
+465 au lieu de 587 en ce qui concerne le port
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+
+Comme la gestion des mails par Gmail nécessite une configuration sécuritaire moins grande j'ai décidé d'opter pour la messagerie orange
+
+app.config['MAIL_SERVER'] = 'smtp.orange.fr'
+app.config['MAIL_PORT'] = 587
 
 
 
