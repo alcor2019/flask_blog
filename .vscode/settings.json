@@ -1,0 +1,4 @@
+{
+    "python.formatting.provider": "black",
+    "python.pythonPath": "C:\\Users\\alain\\Anaconda3\\envs\\flaskblog\\python.exe"
+}
